@@ -78,10 +78,6 @@ qt4_wrap_cpp(MOC_FILES
   tool_properties_panel.h
 )
 
-if(APPLE)
-  set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS "-undefined dynamic_lookup")
-endif(APPLE)
-
 find_package(ASSIMP QUIET)
 if (NOT ASSIMP_FOUND)
   pkg_check_modules(ASSIMP assimp)
@@ -225,6 +221,10 @@ target_link_libraries(${PROJECT_NAME}
   assimp
   yaml-cpp
 )
+
+if(APPLE)
+  set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS "-undefined dynamic_lookup")
+endif(APPLE)
 
 ########### The rviz executable ###########
 add_executable(executable main.cpp)
